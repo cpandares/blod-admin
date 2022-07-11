@@ -4,6 +4,9 @@
 
 Blog autoadministrable, se implemento plantilla Admn Lte para el mantenimiento.
 
+en la consola correr el comando composer install para reconstruir la carpeta vendor.
+Despues correr npm install && npm run dev Para los estilos de tailwind
+
 * Politicas de acceso.
 * Form request
 * Roles y permisos
