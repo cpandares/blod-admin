@@ -15,6 +15,6 @@
     <link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
-@section('js')
-    <script> console.log('Hi!'); </script>
+@section('js')  
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop

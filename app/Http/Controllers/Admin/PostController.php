@@ -127,6 +127,6 @@ class PostController extends Controller
         Cache::flush();
         /* image delete with Post Observer */
 
-        return redirect()->route('admin.post.index')->with(['message' => 'Post Delete']);
+        return redirect()->route('admin.post.index')->with(['delete' => 'Post Delete']);
     }
 }

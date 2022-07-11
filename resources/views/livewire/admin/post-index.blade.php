@@ -1,19 +1,14 @@
 <div>
-  
+
     <div class="card">
         @if(session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
         @endif
-        
+
         <div class="card-header">
-            <input 
-                wire:model="search" 
-                type="text" 
-                class="form-control" 
-                placeholder="Find your post"
-            >
+            <input wire:model="search" type="text" class="form-control" placeholder="Find your post">
         </div>
 
         @if($posts->count() > 0)
@@ -30,25 +25,25 @@
                 </thead>
                 <tbody>
                     @foreach ($posts as $post)
-                        <tr>
-                            <td>{{ $post->id }}</td>
-                            <td>{{ $post->title }}</td>
-                            <td width="10px">
-                                <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary btn-sm">
-                                    Edit
-                                </a>
-                            </td>
-                            <td width="10px">
-                                <form action="{{ route('admin.post.destroy' , $post) }}" method="post">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger btn-sm" type="submit">
-                                        Delete
-                                    </button>
-                                </form>
-                              
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>{{ $post->id }}</td>
+                        <td>{{ $post->title }}</td>
+                        <td width="10px">
+                            <a href="{{ route('admin.post.edit', $post) }}" class="btn btn-primary btn-sm">
+                                Edit
+                            </a>
+                        </td>
+                        <td width="10px">
+                            <form method="post" action="{{ route('admin.post.destroy', $post) }}" class="formDelete" >
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-sm" type="submit">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -58,10 +53,35 @@
             {{ $posts->links() }}
         </div>
         @else
-            <div class="card-body">
-                <h1>No post found</h1>
-            </div>
+        <div class="card-body">
+            <h1>No post found</h1>
+        </div>
         @endif
     </div>
 
 </div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    
+
+
+<script>
+    $('.formDelete').submit(function(e){
+        e.preventDefault();
+        let form = event.target;
+        Swal.fire({
+            title: 'Are you sure wanna delete this Post?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Yes, Delete!'
+        }).then((result) => {
+            if (result.value) {
+                this.submit();
+            }
+        });
+    })
+   
+</script>
+

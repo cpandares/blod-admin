@@ -43,7 +43,7 @@
                         </td>
                         <td width="10px">
                             @can('admin.tags.destroy')                                
-                                <form action="{{ route('admin.tags.destroy' , $tag) }}" method="post">
+                                <form action="{{ route('admin.tags.destroy' , $tag) }}" method="post" class="formDelete">
                                     @csrf
                                     @method('delete')
                                     <button class="btn btn-danger btn-sm" type="submit">
@@ -66,5 +66,24 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $('.formDelete').submit(function(e) {
+            e.preventDefault();
+            let form = event.target;
+            Swal.fire({
+                title: 'Are you sure wanna delete this tag and all posts relative?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Yes, Delete!'
+            }).then((result) => {
+                if (result.value) {
+                    this.submit();
+                }
+            });
+        })
+    </script>
 @stop
