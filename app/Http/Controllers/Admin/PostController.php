@@ -58,9 +58,7 @@ class PostController extends Controller
             $post->image()->create([
                 'url' => $response,
             ]);
-        }
-
-       
+        }       
 
         return redirect()->route('admin.post.index')->with(['message' => 'Post Created']);
     }
@@ -127,6 +125,6 @@ class PostController extends Controller
         Cache::flush();
         /* image delete with Post Observer */
 
-        return redirect()->route('admin.post.index')->with(['delete' => 'Post Delete']);
+        return redirect()->route('admin.post.index')->with(['message' => 'Post Delete']);
     }
 }

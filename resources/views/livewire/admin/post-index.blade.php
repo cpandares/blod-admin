@@ -1,11 +1,11 @@
 <div>
 
     <div class="card">
-        @if(session('message'))
+        {{-- @if(session('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
             </div>
-        @endif
+        @endif --}}
 
         <div class="card-header">
             <input wire:model="search" type="text" class="form-control" placeholder="Find your post">
@@ -60,8 +60,20 @@
     </div>
 
 </div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    
+
+@push('js')
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+
+    @if(session('message'))
+        
+        <script>
+            Swal.fire('Done','','success')
+        </script>
+        
+    @endif
+
 
 
 <script>
@@ -70,7 +82,7 @@
         let form = event.target;
         Swal.fire({
             title: 'Are you sure wanna delete this Post?',
-            type: 'warning',
+            icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
@@ -84,4 +96,9 @@
     })
    
 </script>
+@endpush
+
+    
+
+
 

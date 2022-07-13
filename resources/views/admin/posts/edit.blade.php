@@ -7,11 +7,7 @@
 @stop
 
 @section('content')
-    @if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-    @endif
+  
     <div class="card">
         <div class="card-body">
             {!! Form::model($post,['route'=>['admin.post.update', $post], 'autocomplete'=>'off', 'files'=>true, 'method'=>'put']) !!}
@@ -42,6 +38,14 @@
 @stop
 
 @section('js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if(session('message'))            
+        <script>
+            Swal.fire('Done','','success')
+        </script>
+    @endif
+
+
     <script src="{{ asset('vendor/jQuery-Plugin-stringToSlug-1.3/jquery.stringToSlug.min.js') }}"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js"></script>
     <script>
@@ -78,6 +82,9 @@
             };
             reader.readAsDataURL(file);
         }
+
+
+        
 
     </script>
 @stop
